@@ -48,14 +48,16 @@ public class consultandoClientes extends JFrame {
 		JButton btnNewButton = new JButton("CONSULTAR");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String nome = nome_pessoa.getText();
+
 				conexaosql conexao = new conexaosql();
-				String consulta = "SELECT *FROM clientes; ";
+				String consulta = "SELECT nome, email FROM clientes WHERE nome = " + "'" + nome + "'";
 				ResultSet consultar = conexao.executaBusca(consulta);
 				try {
-				while ( consultar.next()) {
+				 consultar.next();
 					
 					JOptionPane.showMessageDialog(null, "NOME DO CLIENTE: " + consultar.getString("nome") + " | " + "EMAIL DO CLIENTE: " + consultar.getString("email"));
-				}
+				
 			}
 			catch( Exception a ){
 				a.printStackTrace();
